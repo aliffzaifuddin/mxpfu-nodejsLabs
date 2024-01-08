@@ -11,8 +11,7 @@ app.use(session({secret:"fingerpint",resave: true, saveUninitialized: true}))
 app.use(express.json());
 
 app.use("/user", (req,res,next)=>{
-// Middleware which tells that the user is authenticated or not
-   
+    // Middleware which tells that the user is authenticated or not
    if(req.session.authorization) {
        let token = req.session.authorization['accessToken']; // Access Token
        
@@ -39,7 +38,7 @@ app.post("/login", (req,res) => {
     }
     let accessToken = jwt.sign({
         data: user
-      }, 'access', { expiresIn: 60 * 60 });
+      }, 'access', { expiresIn: 60 * 60 }); // this validty length specified by 60 * 60, which signifies the time in seconds.
 
       req.session.authorization = {
         accessToken
